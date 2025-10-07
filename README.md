@@ -1,4 +1,4 @@
-#Proyecto de Compiladores#
+# Proyecto de Compiladores #
 ## Analizador Léxico
 **Pasos de instalación:**
 1. Crear entorno virtual de Python a nivel de proyecto
