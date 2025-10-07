@@ -21,13 +21,13 @@
             <div class="row">
                 <!--INPUT IZQUIERDO-->
                 <div class="col-md-6 mb-3 mb-md-0 d-flex flex-column">
-                    <textarea class="form-control h-100" placeholder="Ingresa tu código aquí..."></textarea>
+                    <textarea id="textoEntrada" class="form-control h-100" placeholder="Ingresa tu código aquí..."></textarea>
                 </div>
 
                 <!--TABLA DERECHA-->
                 <div class="col-md-6 d-flex flex-column">
                     <div class="table-responsive h-100 border rounded">
-                        <table class="table table-bordered table-striped mb-0">
+                        <table id="tablaResultados" class="table table-bordered table-striped mb-0">
                             <!--Colunas-->
                             <thead class="table-dark">
                                 <tr>
@@ -38,31 +38,6 @@
                                 </tr>
                             </thead>
                             <tbody id="output-table-body">
-                                <!-- Filas dinámicas o de ejemplo -->
-                                <tr>
-                                <td>let</td>
-                                <td>Palabra reservada</td>
-                                <td>1</td>
-                                <td>1</td>
-                                </tr>
-                                <tr>
-                                <td>x</td>
-                                <td>Identificador</td>
-                                <td>1</td>
-                                <td>5</td>
-                                </tr>
-                                <tr>
-                                <td>=</td>
-                                <td>Operador</td>
-                                <td>1</td>
-                                <td>7</td>
-                                </tr>
-                                <tr>
-                                <td>10</td>
-                                <td>Número</td>
-                                <td>1</td>
-                                <td>9</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
