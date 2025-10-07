@@ -3,7 +3,7 @@
 **Pasos de instalación:**
 1. Crear entorno virtual de Python a nivel de proyecto
 ```powershell
-python -m venv env
+python -m venv venv
 ```
 2. Activar entorno virtual
 ```powershell
