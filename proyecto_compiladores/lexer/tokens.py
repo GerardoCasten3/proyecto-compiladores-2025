@@ -51,6 +51,7 @@ class TokenType(Enum):
     
     # Otros operadores
     DOT = auto()           # .
+    ARROW = auto()         # ->
     
     # Delimitadores
     COMMA = auto()         # ,
