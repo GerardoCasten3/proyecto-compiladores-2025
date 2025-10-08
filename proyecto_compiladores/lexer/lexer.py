@@ -208,6 +208,11 @@ class Lexer:
                     return Token(TokenType.OR, "||", start_line, start_col)
                 raise LexerError(f"Carácter inesperado: '|' (se esperaba ' || ')", start_line, start_col)
             
+            if self.current_char == '-' and self.peek() == '>':
+                self.advance()  # consumir '-'
+                self.advance()  # consumir '>'
+                return Token(TokenType.ARROW, "->", start_line, start_col)
+            
             # Operadores y delimitadores de un solo carácter
             if self.current_char in SINGLE_CHAR_TOKENS:
                 char = self.current_char
