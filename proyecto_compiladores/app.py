@@ -10,17 +10,30 @@ def index():
     return render_template('index.html')
 
 @app.route('/analizar', methods=['POST'])
-def tokenize ():
-    data=request.json
+def tokenize():
+    data = request.json
     source_code = data.get('source_code', '')
-    
+
+    lexer = Lexer(source_code)
     try:
-        lexer = Lexer(source_code)
         tokens = lexer.tokenize()
-        token_list = [{'value': token.value, 'type': token.type.name, 'line': token.line, 'column': token.column} for token in tokens]
-        return jsonify({'success':True,'tokens': token_list})
+        token_list = [
+            {'value': t.value, 'type': t.type.name, 'line': t.line, 'column': t.column}
+            for t in tokens
+        ]
+        return jsonify({'success': True, 'tokens': token_list})
+
     except LexerError as e:
-        return jsonify({'success':False,'error': str(e)}), 400
+        # Recuperar tokens válidos acumulados dentro del lexer
+        token_list = [
+            {'value': t.value, 'type': t.type.name, 'line': t.line, 'column': t.column}
+            for t in getattr(lexer, 'tokens', [])
+        ]
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'partial_tokens': token_list
+        }), 400
     
 if __name__ == "__main__":
     app.run(debug=True)

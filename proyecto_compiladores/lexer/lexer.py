@@ -63,7 +63,7 @@ class Lexer:
                 self.advance()
         
         # Si llegamos aquí, no se cerró el comentario
-        raise LexerError("Comentario no cerrado (se esperaba '//')", start_line, start_col)
+        raise LexerError("Comentario no cerrado (se esperaba ' // ')", start_line, start_col)
     
     def read_string(self):
         """Lee un string literal "texto" """
@@ -81,7 +81,7 @@ class Lexer:
             self.advance()  # Consumir la comilla final "
             return Token(TokenType.STRING_LIT, f'"{string_value}"', start_line, start_col)
         else:
-            raise LexerError("String literal no cerrado (se esperaba '\"')", start_line, start_col)
+            raise LexerError("String literal no cerrado (se esperaba ' \" ')", start_line, start_col)
     
     def read_number(self):
         """Lee un número: entero, decimal o notación científica"""
@@ -115,7 +115,7 @@ class Lexer:
             
             # Exponente (debe tener al menos un dígito)
             if not (self.current_char and self.current_char.isdigit()):
-                raise LexerError(f"Número en notación científica inválido: '{num_str}'", start_line, start_col)
+                raise LexerError(f"Número en notación científica inválido: ' {num_str} '", start_line, start_col)
             
             while self.current_char and self.current_char.isdigit():
                 num_str += self.current_char
@@ -199,14 +199,19 @@ class Lexer:
                 if self.current_char == '&':
                     self.advance()
                     return Token(TokenType.AND, "&&", start_line, start_col)
-                raise LexerError(f"Carácter inesperado: '&' (se esperaba '&&')", start_line, start_col)
+                raise LexerError(f"Carácter inesperado: '&' (se esperaba ' && ')", start_line, start_col)
             
             if self.current_char == '|':
                 self.advance()
                 if self.current_char == '|':
                     self.advance()
                     return Token(TokenType.OR, "||", start_line, start_col)
-                raise LexerError(f"Carácter inesperado: '|' (se esperaba '||')", start_line, start_col)
+                raise LexerError(f"Carácter inesperado: '|' (se esperaba ' || ')", start_line, start_col)
+            
+            if self.current_char == '-' and self.peek() == '>':
+                self.advance()  # consumir '-'
+                self.advance()  # consumir '>'
+                return Token(TokenType.ARROW, "->", start_line, start_col)
             
             # Operadores y delimitadores de un solo carácter
             if self.current_char in SINGLE_CHAR_TOKENS:
@@ -215,7 +220,7 @@ class Lexer:
                 return Token(SINGLE_CHAR_TOKENS[char], char, start_line, start_col)
             
             # Carácter no reconocido
-            raise LexerError(f"Carácter no reconocido: '{self.current_char}'", start_line, start_col)
+            raise LexerError(f"Carácter no reconocido: ' {self.current_char} '", start_line, start_col)
         
         # Fin del archivo
         return Token(TokenType.EOF, "", self.line, self.column)
