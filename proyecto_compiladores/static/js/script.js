@@ -2,6 +2,8 @@ const boton = document.getElementById('btnEnviar');
 
 boton.addEventListener('click', async function() {
     const textoEntrada = document.getElementById('textoEntrada').value;
+    const textLog = document.getElementById('salidaTexto');
+    textLog.classList.remove('error-log');
     const url = '/analizar'; 
 
     let init = {
@@ -16,11 +18,14 @@ boton.addEventListener('click', async function() {
     let data = await response.json();
     if(response.ok) {
         showResultsOnTable(data.tokens);
+        showLog(data.ast);
     } else {
+        textLog.classList.add('error-log');
         if(data.partial_tokens) {
             showResultsOnTable(data.partial_tokens);
         }
         appendErrorToTable(data.error);
+        showLog(data.ast);
     }  
   });
 
@@ -43,4 +48,11 @@ boton.addEventListener('click', async function() {
         cell.colSpan = 4; 
         cell.innerText = `Error: ${errorMessage}`;
         cell.style.color = 'red'; 
+    }
+
+    function showLog(astRepresentation) {
+        const logArea = document.getElementById('salidaTexto');
+        
+        logArea.value = "";
+        logArea.value = astRepresentation;
     }

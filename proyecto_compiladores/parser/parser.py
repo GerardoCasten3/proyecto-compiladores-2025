@@ -74,11 +74,9 @@ class Parser:
             self.expect(TokenType.EOF)
             
             return Program(module_decl, imports, top_declarations)
-        
         except ParserError as e:
-            print(f"\n❌ ERROR DE ANÁLISIS SINTÁCTICO")
-            print(f"   {e}")
-            raise
+            raise e
+        
     
     def parse_module_decl(self) -> ModuleDecl:
         """ModuleDecl → module QualID ';'"""
