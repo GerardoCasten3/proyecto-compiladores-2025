@@ -8,54 +8,66 @@
     <title>Compiladores</title>
 </head>
 <body>
-    <!--TODO EL CONTENEDOR-->
-    <main>
-        <div class="container">
-            <h1>Analizador Léxico</h1>
-            
-            <!--Mensaje de error oculto-->
-            <div class="alert alert-danger d-none" id="error-message" role="alert">
-                <strong>Error:</strong>AQUI VA EL ERROR
+ 
+<main>
+    <div class="mi-container">
+        <h1>Analizador Léxico</h1>
+       
+        <!--Mensaje de error oculto-->
+        <div class="alert alert-danger d-none" id="error-message" role="alert">
+            <strong>Error:</strong> AQUI VA EL ERROR
+        </div>
+ 
+        <!-- 1. ENTRADA (ARRIBA) -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <label for="textoEntrada" class="form-label fw-bold">Entrada:</label>
+                <textarea id="textoEntrada" class="form-control" rows="6"
+                          placeholder="Ingresa tu código aquí..."></textarea>
             </div>
-            <!--Dos contenedores de entrada y tabla-->
-            <div class="row">
-                <!--INPUT IZQUIERDO-->
-                <div class="col-md-6 mb-3 mb-md-0 d-flex flex-column">
-                    <textarea id="textoEntrada" class="form-control h-100" placeholder="Ingresa tu código aquí..."></textarea>
-                </div>
-
-                <!--TABLA DERECHA-->
-                <div class="col-md-6 d-flex flex-column">
-                    <div class="table-responsive h-100 border rounded">
-                        <table id="tablaResultados" class="table table-bordered table-striped mb-0">
-                            <!--Colunas-->
-                            <thead class="table-dark">
-                                <tr>
+        </div>
+ 
+        <!-- 2. SALIDA / MENSAJES (EN MEDIO) -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <label for="salidaTexto" class="form-label fw-bold">Salida / Mensajes:</label>
+                <textarea id="salidaTexto" class="form-control" rows="4" readonly
+                          placeholder="Aquí aparecerán los mensajes del analizador..."></textarea>
+            </div>
+        </div>
+ 
+        <!-- 3. TABLA DE TOKENS (ABAJO) -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <label class="form-label fw-bold">Tabla de Tokens:</label>
+                <div class="table-responsive border rounded">
+                    <table id="tablaResultados" class="table table-bordered table-striped mb-0">
+                        <thead class="table-dark">
+                            <tr>
                                 <th>Cadena</th>
                                 <th>TokenType</th>
                                 <th>Línea</th>
                                 <th>Columna</th>
-                                </tr>
-                            </thead>
-                            <tbody id="output-table-body">
-                            </tbody>
-                        </table>
-                    </div>
+                            </tr>
+                        </thead>
+                        <tbody id="output-table-body"></tbody>
+                    </table>
                 </div>
             </div>
-
-            <!-- BOtON-->
-            <div class="mt-4 flex-column">
-                    <div class="button text-center">
-                        <button class="btn btn-primary" type="submit" id="btnEnviar">
-                            <span>REVISAR</span>
-                        </button>
-                    </div>
-            </div>
         </div>
-    </main>
-
-    <script src="../static/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+        <!-- BOTÓN -->
+        <div class="mt-4 text-center">
+            <button class="btn btn-primary" type="submit" id="btnEnviar">
+                <span>REVISAR</span>
+            </button>
+        </div>
+ 
+    </div>
+</main>
+ 
+<script src="../static/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
 </body>
 </html>
